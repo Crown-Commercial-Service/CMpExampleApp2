@@ -1,0 +1,53 @@
+<h1 class="govuk-heading-xl">Example Application</h1>
+<h1><%= @title %></h1>
+<p>Welcome to the <%= @title %></p>
+<br>
+<h3>Checking Features</h3>
+<% if @featureEG1 %>
+    <p>Feature: <strong>EG1</strong> is <strong>ON</strong>.</p>
+<% else %>
+    <p>Feature: <strong>EG1</strong> is <strong>OFF</strong>.</p>
+<% end %>
+<br>
+<h3>Environment Variables.</h3>
+<table border="2" style="width: 100%; table-layout: fixed;">
+    <tr><th>Property</th><th>Value</th></tr>
+    <% @localEnv.each do |k, v| %>
+        <tr><td><%= k %></td><td style="width: 100%; white-space: pre-wrap; overflow: hidden; text-overflow: ellipsis;"><%= v %></td></tr>
+    <% end %>
+</table>
+<br>
+<% if @apiCallOK && @apiResponse != nil %>
+    <% if !@apiResponse['properties'].blank?  %>
+        <h3>System Properties obtained from request to [api1.ccsdev-internal.org].</h3>
+        <table border="2" style="width: 100%; table-layout: fixed;">
+            <tr><th>Property</th><th>Value</th></tr>
+            <% @apiResponse['properties'].each do |k, v| %>
+                <tr><td><%= k %></td><td style="width: 100%; white-space: pre-wrap; overflow: hidden; text-overflow: ellipsis;"><%= v %></td></tr>
+            <% end %>
+        </table>
+        <br>
+        <br>
+    <% end %>
+    <% if !@apiResponse['environment'].blank? %>
+        <h3>Environment Variables obtained from request to [api1.ccsdev-internal.org].</h3>
+        <table border="2" style="width: 100%; table-layout: fixed;">
+            <tr><th>Variable</th><th>Value</th></tr>
+            <% @apiResponse['environment'].each do |k, v| %>
+                <tr><td><%= k %></td><td style="width: 100%; white-space: pre-wrap; overflow: hidden; text-overflow: ellipsis;"><%= v %></td></tr>
+            <% end %>
+        </table>
+        <br>
+        <br>
+    <% end %>
+    <h3>Java Runtime information from [api1.ccsdev-internal.org].</h3>
+    <table border="2" style="width: 100%; table-layout: fixed;">
+        <tr><th>Setting</th><th>Value</th></tr>
+        <tr><td>Available Processors</td><td><%= @apiResponse['availableProcessors'] %></td></tr>
+        <tr><td>Max Memory</td><td><%= @apiResponse['maxMemory'] %></td></tr>
+        <tr><td>Total Memory</td><td><%= @apiResponse['totalMemory'] %></td></tr>
+        <tr><td>Free Memory</td><td><%= @apiResponse['freeMemory'] %></td></tr>
+    </table>
+<% else %>
+    <h3>Error Calling API</h3>
+<% end %>
