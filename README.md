@@ -36,3 +36,10 @@ Then define the following environment variable:
 Running the application again and accessing `http://localhost:8080/` should now result in the Api call succeeding. It is important that the request to the api is made using the host name defined in the rules for the load balancer attached to the ECS Api cluster, the default being `api1.ccsdev-internal.org`.
 
 If you are building and running the example Api locally as a Java application change `192.168.99.100` to `127.0.0.1`.
+
+## Dockerfile ##
+The project includes a simple Docker file, this is used by the build pipeline to generate the container image. It must expose port 8080. If Docker is installed it can be executed locally.
+
+To build the Docker image locally execute:
+
+`docker image build -t ccs/app2 .`
