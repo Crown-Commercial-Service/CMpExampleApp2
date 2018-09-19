@@ -1,8 +1,17 @@
 FROM ruby:2.5-alpine
 
 # Build information
-ARG GIT_COMMIT=unspecified
+ARG GIT_COMMIT
 LABEL git_commit=$GIT_COMMIT
+ENV GIT_COMMIT=$GIT_COMMIT
+
+ARG GIT_URL
+LABEL git_url=$GIT_URL
+ENV GIT_URL=$GIT_URL
+
+ARG BUILD_TIME
+LABEL build_time=$BUILD_TIME
+ENV BUILD_TIME=$BUILD_TIME
 
 ENV BUILD_PACKAGES curl-dev ruby-dev sqlite-dev build-base
 
