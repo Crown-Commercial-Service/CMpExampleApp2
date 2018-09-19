@@ -1,5 +1,9 @@
 FROM ruby:2.5-alpine
 
+# Build information
+ARG GIT_COMMIT=unspecified
+LABEL git_commit=$GIT_COMMIT
+
 ENV BUILD_PACKAGES curl-dev ruby-dev sqlite-dev build-base
 
 # Update and install base packages
