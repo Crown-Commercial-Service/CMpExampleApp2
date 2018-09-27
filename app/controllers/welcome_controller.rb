@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
 
     appConfig = AppConfig.new()
     @featureEG1 = appConfig.isFeatureEnabled('EG1')
-    api_url = appConfig.getApiURL('api1') << '/systeminfo?detail=all'
+    api_url = appConfig.getApiURL('api2') << '/systeminfo?detail=all'
 
     begin
       response = RestClient::Request.execute(method: :get, url: api_url, timeout: 0.1)
