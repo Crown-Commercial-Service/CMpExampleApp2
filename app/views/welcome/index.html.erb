@@ -19,7 +19,7 @@
 <br>
 <% if @apiCallOK && @apiResponse != nil %>
     <% if !@apiResponse['properties'].blank?  %>
-        <h3>System Properties obtained from request to [api1.ccsdev-internal.org].</h3>
+        <h3>System Properties obtained from request to [<%= @base_url %>].</h3>
         <table border="2" style="width: 100%; table-layout: fixed;">
             <tr><th>Property</th><th>Value</th></tr>
             <% @apiResponse['properties'].each do |k, v| %>
@@ -30,7 +30,7 @@
         <br>
     <% end %>
     <% if !@apiResponse['environment'].blank? %>
-        <h3>Environment Variables obtained from request to [api1.ccsdev-internal.org].</h3>
+        <h3>Environment Variables obtained from request to [<%= @base_url %>].</h3>
         <table border="2" style="width: 100%; table-layout: fixed;">
             <tr><th>Variable</th><th>Value</th></tr>
             <% @apiResponse['environment'].each do |k, v| %>
@@ -40,7 +40,7 @@
         <br>
         <br>
     <% end %>
-    <h3>Java Runtime information from [api1.ccsdev-internal.org].</h3>
+    <h3>System Runtime information from [<%= @base_url %>].</h3>
     <table border="2" style="width: 100%; table-layout: fixed;">
         <tr><th>Setting</th><th>Value</th></tr>
         <tr><td>Available Processors</td><td><%= @apiResponse['availableProcessors'] %></td></tr>
@@ -48,6 +48,9 @@
         <tr><td>Total Memory</td><td><%= @apiResponse['totalMemory'] %></td></tr>
         <tr><td>Free Memory</td><td><%= @apiResponse['freeMemory'] %></td></tr>
     </table>
+    <pre>
+    <%= @api_response %>
+    </pre>
 <% else %>
     <h3>Error Calling API</h3>
 <% end %>
