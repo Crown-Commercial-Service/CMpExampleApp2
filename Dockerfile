@@ -21,6 +21,10 @@ ARG BUILD_TIME
 LABEL build_time=$BUILD_TIME
 ENV BUILD_TIME=$BUILD_TIME
 
+ARG VERSION
+LABEL version=$VERSION
+ENV VERSION=$VERSION
+
 ENV BUILD_PACKAGES curl-dev ruby-dev sqlite-dev build-base
 
 # Update and install base packages
