@@ -27,6 +27,8 @@ ENV CCS_VERSION=$CCS_VERSION
 
 ENV BUILD_PACKAGES curl-dev ruby-dev sqlite-dev build-base
 
+##_PARAMETER_STORE_MARKER_##
+
 # Update and install base packages
 RUN apk update && apk upgrade && apk add bash $BUILD_PACKAGES nodejs
 
