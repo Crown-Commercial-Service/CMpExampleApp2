@@ -6,7 +6,9 @@ AllCops:
     - lib/**/*.rake
   Exclude:
     - db/schema.rb
-    
+
 Rails:
   Enabled: true
 
+Lint/ScriptPermission:
+  Enabled: false
