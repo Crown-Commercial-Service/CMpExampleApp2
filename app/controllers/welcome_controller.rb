@@ -4,20 +4,26 @@ class WelcomeController < ApplicationController
   def index
     @title = 'CCS Example App2'
     @localEnv = ENV
-    @apiName = 'api2'
+    apiNames = ['api1', 'api2']
 
     appConfig = AppConfig.new()
     @featureEG1 = appConfig.isFeatureEnabled('EG1')
-    @base_url = appConfig.getApiURL(@apiName)
-    api_url = @base_url + '/systeminfo?detail=all'
-
-    begin
-      response = RestClient::Request.execute(method: :get, url: api_url, timeout: 0.1)
-      @apiResponse = JSON.parse(response)
-    rescue
-      @apiCallOK = false
-    else
-      @apiCallOK = true
+    @apiResponses = []
+    apiNames.each do |name|
+      base_url = appConfig.getApiURL(name)
+      api_url = "#{base_url}/systeminfo?detail=all"
+      data = Hash.new
+      @apiResponses.push(data)
+      data['name'] = name.to_str
+      data['base_url'] = base_url.to_str
+      begin
+        response = RestClient::Request.execute(method: :get, url: api_url, timeout: 0.1)
+        data['response'] = JSON.parse(response)
+      rescue
+        data['apiCallOK'] = false
+      else
+        data['apiCallOK'] = true
+      end
     end
   end
 end

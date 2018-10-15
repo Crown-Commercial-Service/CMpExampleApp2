@@ -52,7 +52,7 @@ class AppConfig
                 @appProtocol = v.strip
             elsif evTest.start_with?(@ENV_FEATURE_PREFIX)
                 if ENV['DEBUG']
-                    puts( evTest );
+                    logger.debug( evTest );
                 end
 
                 # Extract feature name and determine if its enabled or not
@@ -68,18 +68,18 @@ class AppConfig
         
         if ENV['DEBUG']
             # Summary of settings
-            puts( "CCS_API_BASE_URL = [" + @apiBaseURL + "]" )
-            puts( "CCS_API_PROTOCOL = [" + @apiProtocol + "]" )
-            puts( "CCS_APP_BASE_URL = [" + @appBaseURL + "]" )
-            puts( "CCS_APP_PROTOCOL = [" + @appProtocol + "]" )
-            puts( "FEATURES = " + @featureInfo.to_json )
+            logger.debug( "CCS_API_BASE_URL = [#{@apiBaseURL}]" )
+            logger.debug( "CCS_API_PROTOCOL = [#{@apiProtocol}]" )
+            logger.debug( "CCS_APP_BASE_URL = [#{@appBaseURL}]" )
+            logger.debug( "CCS_APP_PROTOCOL = [#{@appProtocol}]" )
+            logger.debug( "FEATURES = #{@featureInfo.to_json}" )
         end
     
     end
 
     # Return the URL to access a specific APi
     def getApiURL( apiName )
-        return @apiProtocol << "://" << apiName << "." << @apiBaseURL
+        return "#{@apiProtocol}://#{apiName}.#{@apiBaseURL}"
     end
     
     # Returns true if a particular feature is enabled
